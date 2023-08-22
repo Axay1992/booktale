@@ -1,0 +1,78 @@
+name: booktale
+description: A new Flutter project.
+
+publish_to: 'none' 
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.5
+  http: ^0.13.5
+  kd_api_call: ^0.1.1
+  shared_preferences: ^2.0.20
+  fluttertoast: ^8.2.1
+  flutter_svg: ^2.0.4
+  shimmer: ^2.0.0
+  photo_view: ^0.14.0
+  cached_network_image: ^3.2.3
+  provider: ^6.0.5
+  flutter_localization: ^0.1.13
+  flash_image: ^0.0.4
+  google_fonts: ^4.0.4
+  intl: ^0.18.0
+  intl_phone_field: ^3.1.0
+  carousel_slider: ^4.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  build_runner: ^2.4.6
+  flutter_gen_runner:
+
+flutter_gen:
+  output: lib/gen/ # Optional (default: lib/gen/)
+  line_length: 80
+
+  integrations:
+    flutter_svg: true
+    flare_flutter: true
+    rive: true
+    # lottie: true
+
+flutter:
+    uses-material-design: true
+    # generate: true
+
+    assets:
+        - assets/images/icons/
+        - assets/images/png_img/
+        - assets/images/svg_img/
+        - assets/fonts/familjen_grotesk/
+        - assets/fonts/inter/
+
+
+    fonts:
+        - family: FamiljenGrotesk
+          fonts:
+              - asset: assets/fonts/familjen_grotesk/FamiljenGrotesk-Medium.ttf
+                weight: 500
+              - asset: assets/fonts/familjen_grotesk/FamiljenGrotesk-Bold.ttf
+                weight: 700
+
+        - family: Inter
+          fonts:
+              - asset: assets/fonts/inter/Inter-Regular.ttf
+                weight: 400
+              - asset: assets/fonts/inter/Inter-Medium.ttf
+                weight: 500
+              - asset: assets/fonts/inter/Inter-SemiBold.ttf
+                weight: 600
+              - asset: assets/fonts/inter/Inter-Bold.ttf
+

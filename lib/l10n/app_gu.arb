@@ -1,0 +1,68 @@
+{
+  "en": "English",
+  "gu": "ગુજરાતી",
+  "appName": "BookTale",
+  "darkMode": "Dark Mode",
+  "languages": "Languages",
+  "yourNextChapterAwaits":"“Your Next Chapter Awaits”",
+  "loginAndExplore":"Login and Explore!",
+  "emailId":"Email-ID",
+  "user":"User",
+  "password":"Password",
+  "forgotPassword":"Forgot Password",
+  "login":"Login",
+  "doNotHaveAnAccount":"Don't have an account",
+  "signUp":"Sign up",
+  "emptyEmail": "Please enter your email",
+  "validEmail": "Please enter valid email",
+  "emptyPwd": "Please enter your password",
+  "validPassword": "Please enter at least 8 characters",
+  "invalidUserOrPassword": "Invalid User or Password",
+  "noWorriesWellSendYouResetInstructions":"No worries, we’ll send you reset instructions",
+  "resetPassword":"reset password",
+  "backToLogin":"back to login",
+  "forgotPasswordEmailNote":"We can’t seem to find the right email address for you resend the email that you have registered",
+  "joinTheWorldOfReaders":"“Join the World of Readers: ”",
+  "signUpAndGetStarted":"Sign Up and Get Started!",
+  "fullName":"Full Name",
+  "confirmPassword":"Confirm Password",
+  "register":"Register",
+  "passwordNote":"Password must have min. 8 characters, 1 special character and 1 numeric character.",
+  "alreadyHaveAnAccount":"Already have an account",
+  "emptyName": "Please enter full name",
+  "emptyConfirmPwd": "Please enter confirm password",
+  "validPassword": "Please enter at least 8 characters",
+  "passwordDoNotMatch": "Password must be same as above",
+  "menu":"Menu",
+  "categories":"Categories",
+  "myProfile":"My Profile",
+  "home":"Home",
+  "trending":"Trending",
+  "cart":"Cart",
+  "myOrders":"My Orders",
+  "wishlist":"Wishlist",
+  "logout":"Log out",
+  "recommendations":"Recommendations",
+  "ourFavourites":"OUR FAVOURITES",
+  "topBooksThisWeek":"Top Books this week",
+ 
+  
+  "transferConformationNote":"You are about to transfer the ownership of {society}, once you transfer the owner ship you can not revert this change back.",
+  "@transferConformationNote" : {
+    "placeholders":{
+      "society":{
+        "type": "String"
+      }
+    }
+  },
+
+  "enterOtpThatWeSentOn":"Enter OTP that we sent on +91",
+  "congratulationTransferOwnershipMsg":"Congratulation!! You successfully transfer your owner ship to {member}.",
+  "@congratulationTransferOwnershipMsg" :{
+  "placeholders": {
+    "member":{
+      "type":"String"
+    }
+  }
+ }
+}
