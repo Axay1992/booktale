@@ -1,3 +1,4 @@
+import 'package:booktale/constant/common_sizebox.dart';
 import 'package:booktale/constant/custom_pading_constant.dart';
 import 'package:booktale/gen/assets.gen.dart';
 import 'package:booktale/l10n/app_localizations.dart';
@@ -5,6 +6,7 @@ import 'package:booktale/screen/home/widget/drawer.dart';
 import 'package:booktale/utils/math_utils.dart';
 import 'package:booktale/widget/common/cust_text_widget.dart';
 import 'package:booktale/widget/common/loading_indicator.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +29,44 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _scaffoldKey = GlobalKey<FormState>();
   final FocusNode _node = FocusNode();
+  final FocusNode _searchFocusNode = FocusNode();
+  int _currentIndex = 0;
+
+  final List<Widget> _carouselItems = [
+    Container(
+      margin: const EdgeInsets.all(6.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        image: const DecorationImage(
+          image: NetworkImage(
+              "https://assets-news.housing.com/news/wp-content/uploads/2022/04/07013406/ELEVATED-HOUSE-DESIGN-FEATURE-compressed.jpg"),
+          fit: BoxFit.cover,
+        ),
+      ),
+    ),
+    Container(
+      margin: const EdgeInsets.all(6.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        image: const DecorationImage(
+          image: NetworkImage(
+              "https://assets-news.housing.com/news/wp-content/uploads/2022/04/07013406/ELEVATED-HOUSE-DESIGN-FEATURE-compressed.jpg"),
+          fit: BoxFit.cover,
+        ),
+      ),
+    ),
+    Container(
+      margin: const EdgeInsets.all(6.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        image: const DecorationImage(
+          image: NetworkImage(
+              "https://assets-news.housing.com/news/wp-content/uploads/2022/04/07013406/ELEVATED-HOUSE-DESIGN-FEATURE-compressed.jpg"),
+          fit: BoxFit.cover,
+        ),
+      ),
+    ),
+  ];
 
   // Notifiers
   final LoadingIndicatorNotifier _indicatorNotifier =
@@ -82,6 +122,8 @@ class _HomeScreenState extends State<HomeScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _searchTextField(),
+              spaceHeight10,
+              _carouselDisplayImg(),
               _recommendationsSection(),
             ],
           ),
@@ -100,7 +142,13 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         suffixMode: OverlayVisibilityMode.always,
         suffixInsets: EdgeInsets.only(right: getSize(16)),
-        onSuffixTap: () {},
+        onSuffixTap: () {
+          if (_searchFocusNode.hasFocus) {
+            _searchFocusNode.unfocus();
+          } else {
+            _searchFocusNode.requestFocus();
+          }
+        },
         placeholder: "Search Books, Authors...",
         prefixIcon: Row(
           children: [
@@ -125,19 +173,62 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
 
+  Widget _carouselDisplayImg() => Column(
+        children: [
+          CarouselSlider(
+            items: _carouselItems,
+            options: CarouselOptions(
+              height: getSize(250),
+              autoPlay: true,
+              autoPlayCurve: Curves.fastOutSlowIn,
+              enableInfiniteScroll: true,
+              autoPlayAnimationDuration: const Duration(milliseconds: 800),
+              viewportFraction: 1,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: _carouselItems.map((item) {
+              int index = _carouselItems.indexOf(item);
+              return Container(
+                width: 8.0,
+                height: 8.0,
+                margin:
+                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 2.0),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: _currentIndex == index
+                      ? Theme.of(context).colorScheme.tertiary
+                      : Theme.of(context).colorScheme.outline,
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      );
+
   Widget _recommendationsSection() => Column(
         children: [
           CustText(
             title: AppLocalizations.of(context).recommendations,
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _bookCard(),
-              _bookCard(),
-            ],
-          )
+          SizedBox(
+              height: getVerticalSize(
+                  300), // Set the desired height of the horizontal list
+              child: ListView.separated(
+                  separatorBuilder: (context, index) => spaceWidth20,
+                  scrollDirection:
+                      Axis.horizontal, // Set scroll direction to horizontal
+                  itemCount: 10, // Replace with your desired number of items
+                  itemBuilder: (BuildContext context, int index) {
+                    return _bookCard();
+                  }))
         ],
       );
   Widget _bookCard() => InkWell(
@@ -152,18 +243,49 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             children: [
               Container(
-                  padding: CustPadding.cardPaddingMedium,
-                  decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 10.0,
-                        offset: const Offset(0, 8),
-                      )
-                    ],
-                  ),
-                  child: Assets.images.pngImg.bookImg.image(fit: BoxFit.cover)),
+                padding: CustPadding.cardPaddingMedium,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      blurRadius: 10.0,
+                      offset: const Offset(0, 8),
+                    )
+                  ],
+                ),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    Assets.images.pngImg.bookImg.image(fit: BoxFit.cover),
+                    Container(
+                      height: getVerticalSize(30),
+                      decoration: BoxDecoration(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withOpacity(0.5),
+                          borderRadius: BorderRadius.circular(getSize(6))),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustText(
+                            title: "Out of Stock",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.copyWith(
+                                    color:
+                                        Theme.of(context).colorScheme.tertiary,
+                                    fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
               Container(
+                color: Colors.white,
                 padding: CustPadding.extraSmallCardPadding,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

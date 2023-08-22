@@ -2,7 +2,7 @@ import 'package:booktale/constant/app_constant.dart';
 import 'package:booktale/constant/color_schemes.dart';
 import 'package:booktale/constant/string_constant.dart';
 import 'package:booktale/l10n/app_localizations.dart';
-import 'package:booktale/screen/auth/login_screen.dart';
+import 'package:booktale/screen/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -75,7 +75,7 @@ class _AppState extends State<App> {
           color: Theme.of(context).colorScheme.onPrimary,
         ),
       ),
-      home: const LoginScreen(),
+      home: const HomeScreen(),
       // home: Consumer<AuthProvider>(builder: (context, auth, child) {
       //   return auth.authModel == null
       //       ? const LoginScreen()
